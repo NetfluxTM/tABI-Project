@@ -15,10 +15,31 @@ namespace tABI_Project
         }
         */
 
+        
+        private static double[] Filter(double[] a, double[] b, double[] signal)
+        {
+            double[] result = new double[signal.Length];
 
+            for (int i = 0; i < signal.Length; ++i)
+            {
+                double tmp = 0.0;
+                for (int j = 0; j < b.Length; ++j)
+                {
+                    if (i - j < 0) continue;
+                    tmp += b[j] * signal[i - j];
+                }
+                for (int j = 1; j < a.Length; ++j)
+                {
+                    if (i - j < 0) continue;
+                    tmp -= a[j] * result[i - j];
+                }
+                tmp /= a[0];
+                result[i] = tmp;
+            }
+            return result;
+        }
 
-
-        public static void decimate(string filePath, int decimationRate)
+        public static void Decimate(string filePath, int decimationRate)
         {   // Incoming data should be 2 columns and unspecified rows.
 
             // Read CSV file to list of datapoints (data and time)

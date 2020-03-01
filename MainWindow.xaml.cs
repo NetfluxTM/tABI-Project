@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.Diagnostics;
+
 // Get TextBoxes to only accept numeric input:
 // https://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf
 
@@ -31,14 +33,24 @@ namespace tABI_Project
 
         public MainWindow()
         {
+            Trace.WriteLine("BEGIN TEST");
             InitializeComponent();
             this.DataContext = CurrentModel;
         }
 
         private void btnBegin_Click(object sender, RoutedEventArgs e)
         {
-            var graphWindow = new GraphWindow();
-            graphWindow.Show();
+            double[] CoefficientA = new double[] { 1.00000000, -2.77555756e-16, 3.33333333e-01, -1.85037171e-17 };
+            double[] CoefficientB = new double[] { 0.16666667, 0.5, 0.5, 0.16666667 };
+
+            Trace.WriteLine("Testing get / set of variables!");
+            Trace.WriteLine(DecRate);
+
+            Deci
+
+            /* Ignoring the graph Window for now until we actually do stuff with it */
+            //var graphWindow = new GraphWindow();
+            //graphWindow.Show();
         }
 
         /* Not necessary to update 
@@ -94,7 +106,7 @@ namespace tABI_Project
 
 
         // Properties
-        // TODO: Add Other boxes too, such as decimation rate, etc.
+        // TODO: Make sure each works appropriately, such as decRate
         public string GraphUpperFTR
         {
             get { return this._GraphUpperFTR; }
