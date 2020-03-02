@@ -14,7 +14,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using tABI_Project.Signal_Processing;
+
 using System.Diagnostics;
+
+/* PRIMARY QUESTIONS
+ *      Databinding:
+ *              
+ * 
+ */
+
+
+
 
 // Get TextBoxes to only accept numeric input:
 // https://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf
@@ -33,24 +44,30 @@ namespace tABI_Project
 
         public MainWindow()
         {
-            Trace.WriteLine("BEGIN TEST");
             InitializeComponent();
             this.DataContext = CurrentModel;
         }
 
         private void btnBegin_Click(object sender, RoutedEventArgs e)
         {
+            string readPath = @"D:\Libraries\OneDrive\Documents\Visual Studio 2019\Repos\tABI Project\Resources\Test_Data\1noisySignal.csv";
+
+            
             double[] CoefficientA = new double[] { 1.00000000, -2.77555756e-16, 3.33333333e-01, -1.85037171e-17 };
             double[] CoefficientB = new double[] { 0.16666667, 0.5, 0.5, 0.16666667 };
 
-            Trace.WriteLine("Testing get / set of variables!");
-            Trace.WriteLine(DecRate);
+            DataPoint ourData = new DataPoint();
+            ourData.Decimate(readPath, Int32.Parse(CurrentModel.GraphChannel));
+            //ourData.Decimate(readPath, 2);
 
-            Deci
+            var graphWindow = new GraphWindow();
+            graphWindow.DataContext = CurrentModel;
+            graphWindow.Show();
+        }
 
-            /* Ignoring the graph Window for now until we actually do stuff with it */
-            //var graphWindow = new GraphWindow();
-            //graphWindow.Show();
+        private void FastFilterType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
 
         /* Not necessary to update 

@@ -7,26 +7,47 @@
         mc:Ignorable="d"
         Title="GraphWindow" Height="800" Width="800">
     <DockPanel>
-        <Grid Margin="5" DockPanel.Dock="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" HorizontalAlignment="Left">M-Mode</Button>
-            <Button Grid.Column="1" HorizontalAlignment="Center">A-Line</Button>
-            <Button Grid.Column="1" HorizontalAlignment="Right">Ortho-A-Line</Button>
-        </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Image Source="/Images/EEG_Trace.png"/>
-            <Image Grid.Row="1" Source="/Images/Slow_vs_Fast.png"/>
-        </Grid>
+        <StackPanel>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" HorizontalAlignment="Left">M-Mode</Button>
+                <Button Grid.Column="1" HorizontalAlignment="Center">A-Line</Button>
+                <Button Grid.Column="1" HorizontalAlignment="Right">Ortho-A-Line</Button>
+            </Grid>
+            
+            <Grid Margin="20" Height="380">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label>Hello Moto</Label>
+                <TextBlock Grid.Column="1"
+                           Text="{Binding DecRate, Mode=OneWay}"/>
+                <TextBlock Grid.Column="2"
+                           Text="Howdy Pardner"/>
+
+            </Grid>
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Image Source="D:\Libraries\OneDrive\Documents\Visual Studio 2019\Repos\tABI Project\Resources\Images\EEG_Trace.png"/>
+                <Image Grid.Column="2" Source="D:\Libraries\OneDrive\Documents\Visual Studio 2019\Repos\tABI Project\Resources\Images\Slow_vs_Fast.png"/>
+            </Grid>
+        </StackPanel>
     </DockPanel>
 </Window>

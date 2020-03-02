@@ -12,16 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+//using tABI_Project;
+
 namespace tABI_Project
 {
-    /// <summary>
-    /// Interaction logic for Window1.xaml
-    /// </summary>
-    public partial class GraphWindow : Window
-    {
-        public GraphWindow()
+        /// <summary>
+        /// Interaction logic for GraphWindow.xaml
+        /// </summary>
+        public partial class GraphWindow : Window
         {
-            InitializeComponent();
+            public GraphWindow()
+            {
+                InitializeComponent();
+            }
         }
-    }
 }

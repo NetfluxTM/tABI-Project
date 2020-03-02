@@ -46,8 +46,9 @@
                     <Label Grid.Row="1">
                         Fast-Time Range:
                     </Label>
+                    
                     <TextBox x:Name="GraphUpperFTR"
-                             Text="{Binding Path=GraphUpperFTR}"
+                             Text="{Binding GraphUpperFTR, Mode=TwoWay}"
                              Grid.Row="1"
                              Grid.Column="1"/>
                     <Label Content="-"
@@ -55,7 +56,7 @@
                            Grid.Column="2" 
                            HorizontalAlignment="Center"/>
                     <TextBox x:Name="GraphLowerFTR"
-                             Text="{Binding Path=GraphLowerFTR}"
+                             Text="{Binding GraphLowerFTR, Mode=TwoWay}"
                              Grid.Row="1"
                              Grid.Column="3"/>
                     <Label Content="(μs)"
@@ -67,7 +68,7 @@
                         Slow-Time Range:
                     </Label>
                     <TextBox x:Name="GraphUpperSTR"
-                             Text="{Binding Path=GraphUpperSTR}"
+                             Text="{Binding GraphUpperSTR, Mode=TwoWay}"
                              Grid.Row="2" 
                              Grid.Column="1"/>
                     <Label Content="-"
@@ -75,7 +76,7 @@
                            Grid.Column="2"
                            HorizontalAlignment="Center"/>
                     <TextBox x:Name="GraphLowerSTR"
-                             Text="{Binding Path=GraphLowerSTR}"
+                             Text="{Binding GraphLowerSTR, Mode=TwoWay}"
                              Grid.Row="2"
                              Grid.Column="3"/>
                     <Label Content="(ms)"
@@ -87,7 +88,7 @@
                         Color map Range:
                     </Label>
                     <TextBox x:Name="GraphUpperCMR"
-                             Text="{Binding Path=GraphUpperCMR}"
+                             Text="{Binding GraphUpperCMR, Mode=TwoWay}"
                              Grid.Row="3"
                              Grid.Column="1"/>
                     <Label Content="-" 
@@ -95,7 +96,7 @@
                            Grid.Column="2"
                            HorizontalAlignment="Center"/>
                     <TextBox x:Name="GraphLowerCMR"
-                             Text="{Binding Path=GraphLowerCMR}"
+                             Text="{Binding GraphLowerCMR, Mode=TwoWay}"
                              Grid.Row="3"
                              Grid.Column="3"/>
                     <Label Content="(nV)"
@@ -107,7 +108,7 @@
                         Display Channel (1-32):
                     </Label>
                     <TextBox x:Name="GraphChannel"
-                             Text="{Binding Path=GraphChannel}" 
+                             Text="{Binding GraphChannel, Mode=TwoWay}" 
                              Grid.Row="4"
                              Grid.Column="1"
                              Grid.ColumnSpan="4"/>
@@ -135,27 +136,16 @@
                         Decimation Rate
                     </Label>
                     <ComboBox x:Name="DecRate"
-                              SelectedItem="{Binding Path=DecRate}"
+                              SelectedItem="{Binding DecRate, Mode=TwoWay}"
                               Grid.Row="1" 
                               Grid.Column="1">
                         <!-- SelectionChanged="DecRate_SelectionChanged" add this to above if needed -->
-                        <ComboBoxItem IsSelected="True">2</ComboBoxItem>
-                        <ComboBoxItem>4</ComboBoxItem>
-                        <ComboBoxItem>8</ComboBoxItem>
-                        <ComboBoxItem>16</ComboBoxItem>
-                        <ComboBoxItem>32</ComboBoxItem>
-                        <ComboBoxItem>64</ComboBoxItem>
-                    </ComboBox>
-                    <Label Grid.Row="2" >
-                        Averaging Rate
-                    </Label>
-                    <ComboBox Grid.Row="2" Grid.Column="1">
-                        <ComboBoxItem IsSelected="True">2</ComboBoxItem>
-                        <ComboBoxItem>4</ComboBoxItem>
-                        <ComboBoxItem>8</ComboBoxItem>
-                        <ComboBoxItem>16</ComboBoxItem>
-                        <ComboBoxItem>32</ComboBoxItem>
-                        <ComboBoxItem>64</ComboBoxItem>
+                        <ComboBoxItem Content="2" IsSelected="True"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="8"/>
+                        <ComboBoxItem Content="16"/>
+                        <ComboBoxItem Content="32"/>
+                        <ComboBoxItem Content="64"/>
                     </ComboBox>
                 </Grid>
             </Border>
@@ -195,25 +185,26 @@
                                 Type
                             </Label>
                             <ComboBox x:Name="SlowFilterType"
-                                      SelectedItem="{Binding Path=SlowFilterType}"
+                                      SelectedItem="{Binding SlowFilterType, Mode=TwoWay}"
                                       Grid.Row="1"
                                       Grid.Column="1"
                                       Grid.ColumnSpan="3">
-                                <ComboBoxItem IsSelected="True">BPF</ComboBoxItem>
-                                <ComboBoxItem>LPF</ComboBoxItem>
-                                <ComboBoxItem>HPF</ComboBoxItem>
-                                <ComboBoxItem>GF</ComboBoxItem>
+                                <!-- SelectionChanged="SlowFilterType_SelectionChanged" add this to above if needed -->
+                                <ComboBoxItem Content="BPF" IsSelected="True"/>
+                                <ComboBoxItem Content="LPF"/>
+                                <ComboBoxItem Content="HPF"/>
+                                <ComboBoxItem Content="GF"/>
                             </ComboBox>
                             <Label Grid.Row="2">
                                 Range
                             </Label>
                             <TextBox x:Name="SlowFilterUpper"
-                                     Text="{Binding Path=SlowFilterUpper}"
+                                     Text="{Binding SlowFilterUpper, Mode=TwoWay}"
                                      Grid.Row="2"
                                      Grid.Column="1"/>
                             <Label Content="-" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center"/>
                             <TextBox x:Name="SlowFilterLower"
-                                     Text="{Binding Path=SlowFilterLower}"
+                                     Text="{Binding SlowFilterLower, Mode=TwoWay}"
                                      Grid.Row="2"
                                      Grid.Column="3"/>
                         </Grid>
@@ -240,25 +231,26 @@
                                 Type
                             </Label>
                             <ComboBox x:Name="FastFilterType"
-                                      Text="{Binding Path=FastFilterType}"
+                                      SelectedItem="{Binding FastFilterType, Mode=TwoWay}"
                                       Grid.Row="1" 
                                       Grid.Column="1"
                                       Grid.ColumnSpan="3">
-                                <ComboBoxItem>BPF</ComboBoxItem>
-                                <ComboBoxItem IsSelected="True">LPF</ComboBoxItem>
-                                <ComboBoxItem>HPF</ComboBoxItem>
-                                <ComboBoxItem>GF</ComboBoxItem>
+                                <!-- SelectionChanged="FastFilterType_SelectionChanged" add this to above if needed -->
+                                <ComboBoxItem Content="BPF" IsSelected="True"/>
+                                <ComboBoxItem Content="LPF"/>
+                                <ComboBoxItem Content="HPF"/>
+                                <ComboBoxItem Content="GF"/>
                             </ComboBox>
                             <Label Grid.Row="2">
                                 Range
                             </Label>
                             <TextBox x:Name="FastFilterUpper"
-                                     Text="{Binding Path=FastFilterUpper}"
+                                     Text="{Binding FastFilterUpper, Mode=TwoWay}"
                                      Grid.Row="2" 
                                      Grid.Column="1"/>
                             <Label Content="-" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center"/>
                             <TextBox x:Name="FastFilterLower" 
-                                     Text="{Binding Path=FastFilterLower}"
+                                     Text="{Binding FastFilterLower, Mode=TwoWay}"
                                      Grid.Row="2" 
                                      Grid.Column="3"/>
                         </Grid>
