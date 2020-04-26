@@ -135,17 +135,16 @@
                     <Label Grid.Row="1" >
                         Decimation Rate
                     </Label>
-                    <ComboBox x:Name="DecRate"
-                              SelectedItem="{Binding DecRate, Mode=TwoWay}"
+                    <ComboBox
+                              ItemsSource="{StaticResource DecRateListString}"
+                              DisplayMemberPath="DecRateString"
+                              SelectedValuePath="DecRateString"
+                              SelectedValue="{Binding DecRate}"
                               Grid.Row="1" 
                               Grid.Column="1">
+                        <!-- removed x:Name="cmbDecRate" from ComboBox above-->
+                        <!-- removed SelectedItem="{Binding cmbDecRate, Mode=TwoWay}" from ComboBox above-->
                         <!-- SelectionChanged="DecRate_SelectionChanged" add this to above if needed -->
-                        <ComboBoxItem Content="2" IsSelected="True"/>
-                        <ComboBoxItem Content="4"/>
-                        <ComboBoxItem Content="8"/>
-                        <ComboBoxItem Content="16"/>
-                        <ComboBoxItem Content="32"/>
-                        <ComboBoxItem Content="64"/>
                     </ComboBox>
                 </Grid>
             </Border>
@@ -184,16 +183,15 @@
                             <Label Grid.Row="1">
                                 Type
                             </Label>
-                            <ComboBox x:Name="SlowFilterType"
-                                      SelectedItem="{Binding SlowFilterType, Mode=TwoWay}"
+                            <ComboBox
+                                      ItemsSource="{StaticResource SlowTypeListString}"
+                                      DisplayMemberPath="SlowTypeString"
+                                      SelectedValuePath="SlowTypeString"
+                                      SelectedValue="{Binding SlowFilterType}"
                                       Grid.Row="1"
                                       Grid.Column="1"
                                       Grid.ColumnSpan="3">
                                 <!-- SelectionChanged="SlowFilterType_SelectionChanged" add this to above if needed -->
-                                <ComboBoxItem Content="BPF" IsSelected="True"/>
-                                <ComboBoxItem Content="LPF"/>
-                                <ComboBoxItem Content="HPF"/>
-                                <ComboBoxItem Content="GF"/>
                             </ComboBox>
                             <Label Grid.Row="2">
                                 Range
@@ -230,16 +228,15 @@
                             <Label Grid.Row="1">
                                 Type
                             </Label>
-                            <ComboBox x:Name="FastFilterType"
-                                      SelectedItem="{Binding FastFilterType, Mode=TwoWay}"
+                            <ComboBox 
+                                      ItemsSource="{StaticResource FastTypeListString}"
+                                      DisplayMemberPath="FastTypeString"
+                                      SelectedValuePath="FastTypeString"
+                                      SelectedValue="{Binding FastFilterType}"
                                       Grid.Row="1" 
                                       Grid.Column="1"
                                       Grid.ColumnSpan="3">
                                 <!-- SelectionChanged="FastFilterType_SelectionChanged" add this to above if needed -->
-                                <ComboBoxItem Content="BPF" IsSelected="True"/>
-                                <ComboBoxItem Content="LPF"/>
-                                <ComboBoxItem Content="HPF"/>
-                                <ComboBoxItem Content="GF"/>
                             </ComboBox>
                             <Label Grid.Row="2">
                                 Range

@@ -15,13 +15,14 @@ namespace tABI_Project.Signal_Processing
 
         // Class members (Fields, properties, methods, instance constructor)
 
-        // Fields
+        #region ∙ Fields ∙
         private double _data = 0;
         private double _time = 0;
         public List<Double> properData = new List<Double>();
+        #endregion
 
 
-        // Properties
+        #region ∙ Properties ∙
         public double data
         {
             get { return _data; }
@@ -32,27 +33,29 @@ namespace tABI_Project.Signal_Processing
             get { return _time; }
             set { _time = value; }
         }
+        #endregion
 
 
-        // Methods
-        /*   
-         *  Used in the Decimate function to read a line from the .csv file, and create a new DataPoint instance
-         */
+        #region ∙ Methods ∙ 
+        // FromCsv: Used in the Decimate function to read a line from the .csv file, and create a new DataPoint instance
         public static DataPoint FromCsv(string csvLine)
         {
-            string[] line_segments = csvLine.Split(','); // Cuts each line into multiple line segments. (separates at each ',' could change to ';' or whatever else)
-            for (int i = 0; i < line_segments.Length; i++) // "for each column"
+            string[] line_segments = csvLine.Split(',');        // Cuts each line into multiple line segments. (separates at each ',' could change to ';' or whatever else)
+            for (int i = 0; i < line_segments.Length; i++)      // "for each column"
             {
-                line_segments[i] = line_segments[i].Trim(); // This removes whitespace from each string in the array.
+                line_segments[i] = line_segments[i].Trim();     // This removes whitespace from each string in the array.
             }
-            DataPoint dataPoint = new DataPoint();
-            dataPoint._data = Convert.ToDouble(line_segments[0]);
-            dataPoint._time = Convert.ToDouble(line_segments[1]);
+            DataPoint dataPoint = new DataPoint
+            {
+                _data = Convert.ToDouble(line_segments[0]),
+                _time = Convert.ToDouble(line_segments[1])
+            };
             return dataPoint;
         }
 
         public void Decimate(string readPath, int decimationRate)
-        {   // Incoming data should be 2 columns and unspecified rows.
+        {   // Current configuration: Incoming data expected to be a csv with 2 columns and unspecified rows.
+            // TO DO: Explain how to change for different amount of columns
 
             // Read CSV file to list of datapoints (data and time)
             List<DataPoint> data = File.ReadAllLines(readPath)  // reads all lines from the CSV file into a string array
@@ -63,7 +66,7 @@ namespace tABI_Project.Signal_Processing
 
             // "data" is now a list of datapoints, each datapoint contains two doubles to hold the value of both columns from the CSV.
 
-            //List<DataPoint> decimatedData = new List<DataPoint>();
+            //List<DataPoint> decimatedData = new List<DataPoint>(); // old, replaced List of datapoints with list of doubles for decimated data
 
             for (int i = decimationRate; i <= data.Count; i++)
             {
@@ -78,7 +81,7 @@ namespace tABI_Project.Signal_Processing
                     avg.data = avg.data / decimationRate;
                     avg.time = avg.time / decimationRate;
 
-                    //decimatedData.Add(avg);
+                    //decimatedData.Add(avg); // old, replaced List of datapoints with list of doubles for decimated data
                     properData.Add(avg.data);
                 }
             }
@@ -113,5 +116,6 @@ namespace tABI_Project.Signal_Processing
             }
             return result;
         }
+        #endregion
     }
 }

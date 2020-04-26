@@ -3,38 +3,213 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
         xmlns:local="clr-namespace:tABI_Project"
+        xmlns:effects="clr-namespace:tABI_Project.Effects"
         mc:Ignorable="d"
-        Title="GraphWindow" Height="800" Width="800">
+        Title="GraphWindow" Height="600" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <!-- Black and white fill color for heat map generation -->
+        <RadialGradientBrush x:Key="gradRadial" >
+            <GradientStop Offset="0" Color="#ffffffff" />
+            <GradientStop Offset="1" Color="#00ffffff" />
+        </RadialGradientBrush>
+        
+        <!-- Array of heat map colors for coloring black and white heat maps -->
+        <x:Array x:Key="aColors" Type="LinearGradientBrush">
+            
+            <!-- Black Body Radiation -->
+            <LinearGradientBrush PresentationOptions:Freeze="True" StartPoint="0,0" EndPoint="1,0" local:AttachedTitle.Title="Black Body Radiation">
+                <GradientStop Color="#000000" Offset="0.00000" />
+                <GradientStop Color="#F82600" Offset="0.11111" />
+                <GradientStop Color="#FC7700" Offset="0.22222" />
+                <GradientStop Color="#FFAB1F" Offset="0.33333" />
+                <GradientStop Color="#FFC360" Offset="0.44444" />
+                <GradientStop Color="#FFDDA4" Offset="0.55555" />
+                <GradientStop Color="#FFF4E4" Offset="0.66666" />
+                <GradientStop Color="#E8EDFF" Offset="0.77777" />
+                <GradientStop Color="#DBE3FF" Offset="0.88888" />
+                <GradientStop Color="#CBD7FF" Offset="0.99999" />
+            </LinearGradientBrush>
+            
+            <!-- Aqua -->
+            <LinearGradientBrush PresentationOptions:Freeze="True" StartPoint="0,0" EndPoint="1,0" local:AttachedTitle.Title="Aqua">
+                <GradientStop Color="Black" Offset="0"/>
+                <GradientStop Color="Aqua" Offset="0.5"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+
+            <!-- Blue&Red -->
+            <LinearGradientBrush PresentationOptions:Freeze="True" StartPoint="0,0" EndPoint="1,0" local:AttachedTitle.Title="Blue and Red">
+                <GradientStop Color="Blue" Offset="0"/>
+                <GradientStop Color="Red" Offset="1"/>
+            </LinearGradientBrush>
+
+            <!-- Deep sea -->
+            <LinearGradientBrush PresentationOptions:Freeze="True" StartPoint="0,0" EndPoint="1,0" local:AttachedTitle.Title="Deep sea">
+                <GradientStop Color="#000000" Offset="0"/>
+                <GradientStop Color="#183567" Offset="0.6"/>
+                <GradientStop Color="#2e649e" Offset="0.75"/>
+                <GradientStop Color="#17adcb" Offset="0.9"/>
+                <GradientStop Color="#00fafa" Offset="1.0"/>
+            </LinearGradientBrush>
+
+            <!-- Color Spectrum -->
+            <LinearGradientBrush PresentationOptions:Freeze="True" StartPoint="0,0" EndPoint="1,0" local:AttachedTitle.Title="Color Spectrum">
+                <GradientStop Color="Navy" Offset="0"/>
+                <GradientStop Color="Blue" Offset="0.25"/>
+                <GradientStop Color="Green" Offset="0.5"/>
+                <GradientStop Color="Yellow" Offset="0.75"/>
+                <GradientStop Color="Red" Offset="1.0"/>
+            </LinearGradientBrush>
+
+            <!-- Incadescent -->
+            <LinearGradientBrush PresentationOptions:Freeze="True" StartPoint="0,0" EndPoint="1,0" local:AttachedTitle.Title="Incadescent">
+                <GradientStop Color="Black" Offset="0"/>
+                <GradientStop Color="DarkRed" Offset="0.33"/>
+                <GradientStop Color="Yellow" Offset="0.66"/>
+                <GradientStop Color="White" Offset="1.0"/>
+            </LinearGradientBrush>
+
+            <!-- Heated Metal -->
+            <LinearGradientBrush PresentationOptions:Freeze="True" StartPoint="0,0" EndPoint="1,0" local:AttachedTitle.Title="Heated Metal">
+                <GradientStop Color="Black" Offset="0"/>
+                <GradientStop Color="Purple" Offset="0.4"/>
+                <GradientStop Color="Red" Offset="0.6"/>
+                <GradientStop Color="Yellow" Offset="0.8"/>
+                <GradientStop Color="White" Offset="1.0"/>
+            </LinearGradientBrush>
+
+            <!-- Sunrise -->
+            <LinearGradientBrush PresentationOptions:Freeze="True" StartPoint="0,0" EndPoint="1,0" local:AttachedTitle.Title="Sunrise">
+                <GradientStop Color="Red" Offset="0"/>
+                <GradientStop Color="Yellow" Offset="0.66"/>
+                <GradientStop Color="White" Offset="1.0"/>
+            </LinearGradientBrush>
+
+            <!-- Stepped Colors -->
+            <LinearGradientBrush PresentationOptions:Freeze="True" StartPoint="0,0" EndPoint="1,0" local:AttachedTitle.Title="Stepped Colors">
+                <GradientStop Color="Navy" Offset="0"/>
+                <GradientStop Color="Navy" Offset="0.25"/>
+                <GradientStop Color="Green" Offset="0.26"/>
+                <GradientStop Color="Green" Offset="0.5"/>
+                <GradientStop Color="Yellow" Offset="0.51"/>
+                <GradientStop Color="Yellow" Offset="0.75"/>
+                <GradientStop Color="Red" Offset="0.76"/>
+                <GradientStop Color="Red" Offset="1.0"/>
+            </LinearGradientBrush>
+
+            <!-- Visible Spectrum -->
+            <LinearGradientBrush PresentationOptions:Freeze="True" StartPoint="0,0" EndPoint="1,0" local:AttachedTitle.Title="Visible Spectrum">
+                <GradientStop Color="#ff00ff" Offset="0"/>
+                <GradientStop Color="#0000ff" Offset="0.25"/>
+                <GradientStop Color="#00ff00" Offset="0.5"/>
+                <GradientStop Color="#ffff00" Offset="0.75"/>
+                <GradientStop Color="#ff0000" Offset="1.0"/>
+            </LinearGradientBrush>
+        </x:Array>
+        
+        <!-- Visual brush containing the actual palette for coloring heat map -->
+        <VisualBrush x:Key="PaletteBrush">
+            <VisualBrush.Visual>
+                <Rectangle Width="256" Height="1" Fill="{Binding SelectedItem, ElementName=cbColors}" />
+            </VisualBrush.Visual>
+        </VisualBrush>
+        
+    </Window.Resources>
+
+    
+    <Grid Background="Black" SizeChanged="Grid_SizeChanged">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Stack panel containing heat map controls -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="Color schema:" Foreground="White" VerticalAlignment="Center"/>
+            <ComboBox x:Name="cbColors" ItemsSource="{StaticResource aColors}" Width="300" Height="25" Margin="5,1,5,3">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Fill="{Binding}" Width="120" Height="10" />
+                            <TextBlock Text="{Binding (local:AttachedTitle.Title)}" Margin="5,0,0,0" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        
+        <!-- Canvas for drawing heatmap -->
+        <local:HeatMap x:Name="cHeatMap" Grid.Row="1" ClipToBounds="True">
+            <local:HeatMap.Effect>
+                <effects:HeatColorizer Palette="{StaticResource PaletteBrush}" />
+            </local:HeatMap.Effect>
+        </local:HeatMap>
+    </Grid>
+
+
+    <!--   
+    
     <DockPanel>
         <StackPanel>
+    
+    
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+                
                 <Button Grid.Column="1" HorizontalAlignment="Left">M-Mode</Button>
                 <Button Grid.Column="1" HorizontalAlignment="Center">A-Line</Button>
                 <Button Grid.Column="1" HorizontalAlignment="Right">Ortho-A-Line</Button>
             </Grid>
             
+            
             <Grid Margin="20" Height="380">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="120"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label>Hello Moto</Label>
-                <TextBlock Grid.Column="1"
-                           Text="{Binding DecRate, Mode=OneWay}"/>
-                <TextBlock Grid.Column="2"
-                           Text="Howdy Pardner"/>
-
+                
+                <StackPanel>
+                    <Label>_GraphUpperFTR</Label>
+                    <Label>_GraphLowerFTR</Label>
+                    <Label>_GraphUpperSTR</Label>
+                    <Label>_GraphLowerSTR</Label>
+                    <Label>_GraphUpperCMR</Label>
+                    <Label>_GraphLowerCMR</Label>
+                    <Label>_GraphChannel</Label>
+                    <Label>_SlowFilterUpper</Label>
+                    <Label>_SlowFilterLower</Label>
+                    <Label>_FastFilterUpper</Label>
+                    <Label>_FastFilterLower</Label>
+                    <Label>_DecRate</Label>
+                    <Label>_SlowFilterType</Label>
+                    <Label>_FastFilterType</Label>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Label Content="{Binding GraphUpperFTR, Mode=OneWay}"/>
+                    <Label Content="{Binding GraphLowerFTR, Mode=OneWay}"/>
+                    <Label Content="{Binding GraphUpperSTR, Mode=OneWay}"/>
+                    <Label Content="{Binding GraphLowerSTR, Mode=OneWay}"/>
+                    <Label Content="{Binding GraphUpperCMR, Mode=OneWay}"/>
+                    <Label Content="{Binding GraphLowerCMR, Mode=OneWay}"/>
+                    <Label Content="{Binding GraphChannel, Mode=OneWay}"/>
+                    <Label Content="{Binding SlowFilterUpper, Mode=OneWay}"/>
+                    <Label Content="{Binding SlowFilterLower, Mode=OneWay}"/>
+                    <Label Content="{Binding FastFilterUpper, Mode=OneWay}"/>
+                    <Label Content="{Binding FastFilterLower, Mode=OneWay}"/>
+                    <Label Content="{Binding DecRate, Mode=OneWay}"/>
+                    <Label Content="{Binding SlowFilterType, Mode=OneWay}"/>
+                    <Label Content="{Binding FastFilterType, Mode=OneWay}"/>
+                </StackPanel>
             </Grid>
             
             <Grid>
@@ -50,4 +225,7 @@
             </Grid>
         </StackPanel>
     </DockPanel>
+    
+     -->
+    
 </Window>

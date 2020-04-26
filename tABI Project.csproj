@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AttachedTitle.cs" />
+    <Compile Include="Effects\HeatColorizer.cs" />
+    <Compile Include="HeatMap.cs" />
+    <Compile Include="HeatPoint.cs" />
     <Compile Include="Signal_Processing.cs" />
     <Compile Include="GraphWindow.xaml.cs">
       <DependentUpon>GraphWindow.xaml</DependentUpon>
@@ -93,7 +97,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    </EmbeddedResource>	<Resource Include="Effects\HeatColorizer.ps" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -101,6 +105,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>  <ItemGroup>
+    <None Include="Effects\HeatColorizer.fx">
+      <Generator>ShaderEffectGenerator</Generator>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

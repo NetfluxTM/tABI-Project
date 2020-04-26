@@ -5,6 +5,27 @@
              xmlns:local="clr-namespace:tABI_Project"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <x:Array x:Key="DecRateListString" Type="local:ComboBoxItemString">
+            <local:ComboBoxItemString DecRateString = "2" />
+            <local:ComboBoxItemString DecRateString = "4" />
+            <local:ComboBoxItemString DecRateString = "8" />
+            <local:ComboBoxItemString DecRateString = "16" />
+            <local:ComboBoxItemString DecRateString = "32" />
+            <local:ComboBoxItemString DecRateString = "64" />
+        </x:Array>
+
+        <x:Array x:Key="SlowTypeListString" Type="local:ComboBoxItemString">
+            <local:ComboBoxItemString SlowTypeString = "BPF" />
+            <local:ComboBoxItemString SlowTypeString = "LPF" />
+            <local:ComboBoxItemString SlowTypeString = "HPF" />
+            <local:ComboBoxItemString SlowTypeString = "GF" />
+        </x:Array>
+        
+        <x:Array x:Key="FastTypeListString" Type="local:ComboBoxItemString">
+            <local:ComboBoxItemString FastTypeString = "BPF" />
+            <local:ComboBoxItemString FastTypeString = "LPF" />
+            <local:ComboBoxItemString FastTypeString = "HPF" />
+            <local:ComboBoxItemString FastTypeString = "GF" />
+        </x:Array>
     </Application.Resources>
 </Application>
