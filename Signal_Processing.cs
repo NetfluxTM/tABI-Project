@@ -2,6 +2,16 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;//For getting window forms. Used here for message boxes.
+using System.Runtime.InteropServices;
+/*note: for all the following library namespaces below,  Download the specific library. For example, to install the MathNet.Filtering Library 
+through the NuGet Package Manager in visual studios, go to the Tools menu>NuGet Package Manager>Manage Packages For Solution. 
+Once here, select the browse tab, and search for MathNet.Filtering option in the search. Select latest version and install*/
+using MathNet.Filtering; //Filtering and other math operation library. See https://filtering.mathdotnet.com/api/ and https://filtering.mathdotnet.com/ for more details
+using Accord.Math; // Math Library, includes useful functions like hilbert transform. 
+using Accord.Controls; //Plotting library from accord. This is not necessary for the program but may help with debug. See http://accord-framework.net/docs/html/N_Accord_Controls.htm and http://accord-framework.net/docs/html/T_Accord_Controls_ScatterplotBox.htm for more info. 
+
+using Accord; //General Namespace for all Accord libraries. Is needed for functionality of above libraries. 
 
 namespace tABI_Project.Signal_Processing
 {
@@ -94,27 +104,34 @@ namespace tABI_Project.Signal_Processing
                 );
         }
 
-        public double[] Filter(double[] a, double[] b, double[] signal)
+        public double[] Filter(double[] inputArray,MathNet.Filtering.ImpulseResponse responseType, int samplingFreq, int frequencyLow, int frequencyHigh,int q)//ResponseType: IIR or FIR, samplingFreq: Sampling frequency in Hz, frequencyLow: Low cuttoff for filter.
         {
-            double[] result = new double[signal.Length];
+            OnlineFilter bandpassFast = OnlineFilter.CreateBandpass(ImpulseResponse.Infinite, samplingFreq, frequencyLow, frequencyHigh, q);
+            bandpassFast.ProcessSamples(inputArray);
+            return inputArray;//Double check to see if we really need to return, if this is working on a referenced array, then the input array should already be altered, which would be this classes data frame. 
 
-            for (int i = 0; i < signal.Length; ++i)
+        }
+        public double[] hilbertTransformBaseBand(double[] input)
+        {
+            int lengthIn = input.Length;
+            if (lengthIn > 16384)
             {
-                double tmp = 0.0;
-                for (int j = 0; j < b.Length; ++j)
-                {
-                    if (i - j < 0) continue;
-                    tmp += b[j] * signal[i - j];
-                }
-                for (int j = 1; j < a.Length; ++j)
-                {
-                    if (i - j < 0) continue;
-                    tmp -= a[j] * result[i - j];
-                }
-                tmp /= a[0];
-                result[i] = tmp;
+               
+                MessageBox.Show("Error: Input Length Too large or hilbert transform. Data will not be transformed.","Warning",MessageBoxButton.OK,MessageBoxImage.Error);//For gui, convert this to an error box. 
+                return null;
             }
-            return result;
+            else
+            {
+
+                int power = (int)Math.Ceiling(Math.Log10(lengthIn)/Math.Log10(2));
+                int lengthFiller = (int)Math.Pow(2, power) - (int)lengthIn;
+                double[] fillerArray = MathNet.Numerics.Generate.Step(lengthFiller, 0.0, 0);
+                Array.Resize<double>(ref input, lengthIn + lengthFiller);
+                Array.Copy(fillerArray, 0, input, lengthIn, lengthFiller);
+                HilbertTransform.FHT(input, FourierTransform.Direction.Forward);
+                return input;
+            }
+
         }
         #endregion
     }

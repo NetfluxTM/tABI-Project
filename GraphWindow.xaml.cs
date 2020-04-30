@@ -54,5 +54,10 @@ namespace tABI_Project
 
             cHeatMap.Render();
         }
+
+        private void cbColors_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

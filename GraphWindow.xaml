@@ -128,7 +128,7 @@
         <!-- Stack panel containing heat map controls -->
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <TextBlock Text="Color schema:" Foreground="White" VerticalAlignment="Center"/>
-            <ComboBox x:Name="cbColors" ItemsSource="{StaticResource aColors}" Width="300" Height="25" Margin="5,1,5,3">
+            <ComboBox x:Name="cbColors" ItemsSource="{StaticResource aColors}" Width="300" Height="25" Margin="5,1,5,3" SelectionChanged="cbColors_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
